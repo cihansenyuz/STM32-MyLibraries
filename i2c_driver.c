@@ -1,26 +1,12 @@
 #include "i2c_driver.h"
 
 /* 
-I2C is on the ABP1 bus
-
-I2C1 pins
-PB6		SCL
-PB7		SDA
-
-I2C2 pins
-PB10	SCL
-PB11	SDA
-
-on APB2 register bit0 -> AFIO EN must be set
-on APB1 register bit21 -> I2C1 EN or bit22 -> I2C2 EN must be set
-
-then I2Cx->CR1 , reset using SWRST bit15
-set freq bit0-5 0x08
-
-on I2Cx CR1 bit0 -> enable peripherial must be set
-
+* initiliazes selected I2C port and sets the speed of I2C
+*
+* @param i2c desired i2c port
+* @param speedMode desired speed mode
+* @return none
 */
-
 void i2c_init(char i2c, unsigned short speedMode)
 {
 	RCC->APB2ENR |= 0x01;
@@ -50,6 +36,12 @@ void i2c_init(char i2c, unsigned short speedMode)
 	}
 }
 
+/* 
+* starts the transaction
+*
+* @param i2c port to be communicated
+* @return none
+*/
 void i2c_start(char i2c)
 {
 	if(i2c==1)
@@ -66,6 +58,15 @@ void i2c_start(char i2c)
 	}
 }
 
+/* 
+* sends the adress of the slave device, and tells to device either read data from
+* or write data to 
+*
+* @param i2c port to be communicated
+* @param adress is slave adress
+* @param RW read/write selection
+* @return 1 if the slave is there, 0 if not
+*/
 char i2c_address(char i2c, char address, char RW)
 {
 	char ACK_NACK;
@@ -104,6 +105,13 @@ char i2c_address(char i2c, char address, char RW)
 	}
 }
 
+/* 
+* sends data bits
+*
+* @param i2c port to be communicated
+* @param data to send
+* @return none
+*/
 void i2c_data(char i2c, char data)
 {
 	if(i2c==1)
@@ -125,6 +133,12 @@ void i2c_data(char i2c, char data)
 	
 }
 
+/* 
+* stops the transaction
+*
+* @param i2c port to be communicated
+* @return none
+*/
 void i2c_stop(char i2c)
 {
 	volatile int temp;
@@ -142,6 +156,14 @@ void i2c_stop(char i2c)
 	}
 }
 
+/* 
+* Performs all transaction steps in order to write data to I2C
+*
+* @param i2c port to be communicated
+* @param adress is slave adress
+* @param data to send
+* @return none
+*/
 void i2c_write(char i2c, char address, char data)
 {
 	i2c_start(i2c);
@@ -150,6 +172,13 @@ void i2c_write(char i2c, char address, char data)
 	i2c_stop(i2c);
 }
 
+/* 
+* Reads data from I2C
+*
+* @param I2C port to be communicated
+* @param ACK_NACK
+* @return none
+*/
 char i2c_read(char i2c, char ACK_NACK)
 {
 	char temp;
