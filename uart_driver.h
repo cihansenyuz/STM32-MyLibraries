@@ -29,14 +29,14 @@
 
 struct uartManager
 {
-	unsigned short count; 		/* counter to iterate through the message */
-	unsigned short signal; 		/* to signal when message is recieved */
-	unsigned short mode; 		/* 0: process /// 1/2/3: brigde to uart1/2/3 */
-	unsigned short strategy; 	/* 1:terminator /// 0:interrupt */
-	char terminator; 			/* to determine what char is the terminator when terminator strategy is set*/
+	unsigned short count; 		  /* counter to iterate through the message */
+	unsigned short signal; 		  /* to signal when message is recieved */
+	unsigned short mode; 		    /* 0: process /// 1/2/3: brigde to uart1/2/3 */
+	unsigned short strategy; 	  /* 1:terminator /// 0:interrupt */
+	char terminator; 			      /* to determine what char is the terminator when terminator strategy is set*/
 	unsigned short timeConstant;/* to be used when interrupt strategy is set*/
 	unsigned short timeCounter; /* counter for interrupt */
-	char message[2000];			/* message holder */
+	char message[2000];			    /* message holder */
 };
 
 void uart_send(unsigned short uart, char str[]);
