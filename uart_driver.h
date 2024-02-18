@@ -47,4 +47,4 @@ char uart_RX(unsigned short uart);
 void uart_TX(unsigned short uart, char c);
 void uart_message(unsigned short uart, char str[], struct uartManager* uartMan);
 void systick_interrupt(struct uartManager* uart1Man, struct uartManager* uart2Man,struct uartManager* uart3Man);
-
+void uart_TX_hex(unsigned short uart, unsigned short hex);
