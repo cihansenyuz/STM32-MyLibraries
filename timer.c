@@ -1,6 +1,11 @@
 #include "timer.h"
 
-
+/* 
+* Finds the address of selected timer 
+*
+* @param timer desired timer
+* @return TIM_TypeDef* to the selected timer
+*/
 TIM_TypeDef * get_timer(char timer){
 	TIM_TypeDef * tim;
 	switch(timer)
@@ -13,9 +18,17 @@ TIM_TypeDef * get_timer(char timer){
 	return tim;
 }
 
+/* 
+* configurates timer to tick each milisecond.
+*
+* @param timer desired timer
+* @param ms desired number of ms
+* @return TIM_TypeDef* to the selected timer
+* @note prescaler is set considering CPU freq. 72 MHz; otherwise, need to be changed manually
+*/
 TIM_TypeDef* timer_start_ms(char timer, int ms)
 {
-	int prescaler = 36000-1; /* (108000)/2 - 1 = 53999 for 0.5 ms */
+	int prescaler = 36000-1; /* (72000)/2 - 1 = 35999 for 0.5 ms */
 	TIM_TypeDef * tim;
 	
 	if(timer == 1)
@@ -32,6 +45,13 @@ TIM_TypeDef* timer_start_ms(char timer, int ms)
 	return tim;	
 }
 
+/* 
+* configures timer using timer_start_ms(), and enables timer interrupt
+*
+* @param timer desired timer
+* @param ms desired number of ms
+* @return none
+*/
 void timer_interrupt_start_ms(char timer, int ms)
 {
 	TIM_TypeDef* tim = timer_start_ms(timer, ms);
@@ -49,6 +69,12 @@ void timer_interrupt_start_ms(char timer, int ms)
 	
 }
 
+/* 
+* Resets the flag of timer interrupt
+*
+* @param timer interrupted timer
+* @return none
+*/
 void timer_interrupt_flag_reset(char timer)
 {
 	TIM_TypeDef* tim = get_timer(timer);

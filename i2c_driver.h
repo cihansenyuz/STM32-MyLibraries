@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    systick_delay.h
+  * @file    i2c_driver.h
   * @author  Cihan Senyuz
-  * @brief   Header for systick_delay.c file.
+  * @brief   Header for i2c_driver.c file.
   *                 This file contains the common defines of the application.
   *         I2C1 pins           I2C2 pins
   *         PB6     SCL         PB10    SCL

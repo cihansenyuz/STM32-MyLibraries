@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    help_func.h
   * @author  Cihan Senyuz
-  * @brief   Header for main.c file.
+  * @brief   Header for help_func.c file.
   *                   This file contains the common defines of the application.
   *  
   ******************************************************************************
