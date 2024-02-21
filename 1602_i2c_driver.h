@@ -41,10 +41,62 @@
 #define i2c 2
 #define displayAddress 0x44
 
-void displayWrite(char type, char data);
+/* 
+* Sends given byte to the display. It may be both data(char) or instruction.
+*
+* @param registerType 0: instruction, 1: char/data
+* @param input byte to be send. Either instruction or char data
+* @return none
+*/
+void displayWrite(char registerType, char input);
+
+/* 
+* Configurates display registers to initiliaze it. Displays "All is well!" once it is successfully initiliazed.
+*
+* @param none
+* @return none
+* @note sets communication mode 4 bits and display line 2 rows.
+*/
 void displayInit(void);
+
+/* 
+* Clears display content and moves cursor to the first position
+*
+* @param none
+* @return none
+*/
 void displayClear(void);
+
+/* 
+* Sets on or off display screen, cursor and cursor blinking)
+*
+* @param D 1: display screen on, 0: off
+* @param C 1: cursor on, 0: off
+* @param B 1: blinking cursor on, 0: off
+* @return none
+*/
 void displayOnOff(char D, char C, char B);
+
+/* 
+* Sends given string to be shown on the display where cursor rests.
+*
+* @param message string to be shown on the display
+* @return none
+*/
 void displayMessage(char message[]);
+
+/* 
+* Moves cursor to the beginning of second line
+*
+* @param none
+* @return none
+*/
 void displayNewLine(void);
+
+/* 
+* Moves cursor given number to the right from the current position 
+*
+* @param step number of position to the right
+* @return none
+*/
 void displayShiftCursor(int step);

@@ -58,17 +58,11 @@ int read_GP (unsigned short port, unsigned short pin)
 	int state;
 	
 	if (port == 1)
-	{
 		IDR = (volatile unsigned long*) (&gpioA + offset);
-	}
 	else if (port == 2)
-	{
 		IDR = (volatile unsigned long*) (&gpioB + offset);
-	}
 	else if (port == 3)
-	{
 		IDR = (volatile unsigned long*) (&gpioC + offset);
-	}
 	state = ((*IDR & (1<<pin)) >>pin);
 	return state;
 }
@@ -87,17 +81,11 @@ void write_GP (unsigned short port, unsigned short pin, unsigned short state)
 	unsigned long offset = 0x03;
 	
 	if (port == 1)
-	{
 		ODR = (volatile unsigned long*) (&gpioA + offset);
-	}
 	else if (port == 2)
-	{
 		ODR = (volatile unsigned long*) (&gpioB + offset);
-	}
 	else if (port == 3)
-	{
 		ODR = (volatile unsigned long*) (&gpioC + offset);
-	}
 	state ? (*ODR |= (state<<pin)) : (*ODR &= ~(1<<pin));
 	
 }
@@ -112,13 +100,9 @@ void write_GP (unsigned short port, unsigned short pin, unsigned short state)
 void toggle_GP (unsigned short port, unsigned short pin)
 {
 	if (read_GP(port,pin))
-	{
 		write_GP(port,pin,0);
-	}
 	else
-	{
 		write_GP(port,pin,1);
-	}
 }
 
 

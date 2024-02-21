@@ -36,9 +36,7 @@ int str_find(char str1[],char str2[])
 			{
 				test++;
 				if (test == len1)
-				{
 					result = 1;
-				}
 			}
 		}
 	test = 0;
@@ -56,9 +54,7 @@ int str_exact(char str1[],char str2[])
 {
 	int result = 0;
 	if((str_len(str1) == str_len(str2)) &  str_find(str1,str2))
-	{
 		result = 1;
-	}
 	return result;
 }
 
@@ -104,9 +100,7 @@ char* int2char(unsigned int num)
 	
 	len_str[count] = num + 0x30;
 	for(j=count; j>=0; j--)
-	{
 		str[count-j] = len_str[j];
-	}
 	str[count+1] = '\0';
 	return str;
 }
@@ -126,10 +120,7 @@ int char2int(char str[])
 	int j = 0;
 	
 	for(j=0; j< STRlen; j++)
-	{
 		result = (result * 10) + (str[j] - 0x30);
-	}
-	
 	return result;
 }
 
