@@ -139,7 +139,7 @@ return c;
 }
 
 /* 
-* Writes one byte to the selected uart port
+* Writes a char to the selected uart port
 *
 * @param usart selected uart port
 * @param c char to send
@@ -164,6 +164,35 @@ void uart_TX(unsigned short uart, char c)
 		while ((USART3->SR & (0x80)) == 0x00) /* check status register until is High to know data is ready to be read */
 		{}
 		USART3->DR = c;
+	}
+}
+
+/* 
+* Writes one byte to the selected uart port
+*
+* @param usart selected uart port
+* @param hex byte in hexadecimal to be send
+* @return none
+*/
+void uart_TX_hex(unsigned short uart, unsigned short hex)
+{
+	if(uart == 1)
+	{
+		while ((USART1->SR & (0x80)) == 0x00) /* check status register until is High to know data is ready to be read */
+		{}
+		USART1->DR = hex;
+		
+	}else if(uart == 2)
+	{
+		while ((USART2->SR & (0x80)) == 0x00) /* check status register until is High to know data is ready to be read */
+		{}
+		USART2->DR = hex;
+		
+	} else if(uart == 3)
+	{
+		while ((USART3->SR & (0x80)) == 0x00) /* check status register until is High to know data is ready to be read */
+		{}
+		USART3->DR = hex;
 	}
 }
 
